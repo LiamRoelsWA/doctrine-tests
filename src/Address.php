@@ -4,7 +4,6 @@
 namespace Entities;
 
 
-use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
@@ -67,15 +66,10 @@ class Address
 
 
     /**
-     * @ORM\OneToMany(targetEntity="Customer", mappedBy="address")
+     * @ORM\ManyToOne(targetEntity="Customer", inversedBy="addresses", fetch="EAGER")
+     * @ORM\JoinColumn(name="customer_id", referencedColumnName="id")
      */
-    protected $customers;
-
-
-    public function __construct()
-    {
-        $this->customers = new ArrayCollection();
-    }
+    protected $customer;
 
 
     /**

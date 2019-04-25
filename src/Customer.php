@@ -3,6 +3,7 @@
 
 namespace Entities;
 
+use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
@@ -16,8 +17,8 @@ class Customer
 {
     /**
      * @ORM\Id
-     * @ORM\Column(type="smallint")
-     * @ORM\GeneratedValue(strategy="IDENTITY")
+     * @ORM\Column(type="smallint", unique=true)
+     * @ORM\GeneratedValue
      *
      * @var int
      */
@@ -57,18 +58,23 @@ class Customer
 
 
     /**
-     * @ORM\ManyToOne(targetEntity="Address", inversedBy="customers")
-     * @ORM\JoinColumn(name="address_id", referencedColumnName="id")
-     */
-    protected $address;
-
-
-    /**
-     * @ORM\Column(type="password")
+     * @ORM\Column(type="string")
      *
      * @var string
      */
     protected $password;
+
+
+    /**
+     * @ORM\OneToMany(targetEntity="Address", mappedBy="customer", fetch="EAGER")
+     */
+    protected $addresses;
+
+
+    public function __construct()
+    {
+        $this->addresses = new ArrayCollection();
+    }
 
     /**
      * @return int
@@ -76,14 +82,6 @@ class Customer
     public function getId(): int
     {
         return $this->id;
-    }
-
-    /**
-     * @param int $id
-     */
-    public function setId(int $id): void
-    {
-        $this->id = $id;
     }
 
     /**
@@ -105,22 +103,6 @@ class Customer
     /**
      * @return string
      */
-    public function getAddress(): string
-    {
-        return $this->address;
-    }
-
-    /**
-     * @param string $address
-     */
-    public function setAddress(string $address): void
-    {
-        $this->address = $address;
-    }
-
-    /**
-     * @return string
-     */
     public function getPassword(): string
     {
         return $this->password;
@@ -131,7 +113,7 @@ class Customer
      */
     public function setPassword(string $password): void
     {
-        $this->password = $password;
+        $this->password = password_hash($password, PASSWORD_DEFAULT);
     }
 
     /**
@@ -180,5 +162,21 @@ class Customer
     public function setCellphone(string $cellphone): void
     {
         $this->cellphone = $cellphone;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getAddresses()
+    {
+        return $this->addresses;
+    }
+
+    /**
+     * @param mixed $addresses
+     */
+    public function setAddresses($addresses): void
+    {
+        $this->addresses = $addresses;
     }
 }

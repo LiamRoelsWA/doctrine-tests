@@ -4,14 +4,14 @@ require_once "./bootstrap.php";
 
 use Entities\Product;
 
-$newProductName = "Extra Product";
+$newProductName = "2de product";
 
 $product = new Product();
 
 $product->setName($newProductName);
-$product->setDescription('Beschrijving van het testproduct');
-$product->setPrice(15);
-$product->setSlug('test-product');
+$product->setDescription('Dit is het 2de product dat ik toevoeg');
+$product->setPrice(30);
+$product->setSlug('tweede-product');
 $product->setVat(21);
 
 $em->persist($product);
