@@ -29,7 +29,7 @@ class Customer
      *
      * @var string
      */
-    protected $firstName;
+    protected $first_name;
 
 
     /**
@@ -37,7 +37,7 @@ class Customer
      *
      * @var string
      */
-    protected $lastName;
+    protected $last_name;
 
 
     /**
@@ -53,13 +53,12 @@ class Customer
      *
      * @var string
      */
-    protected $phoneNr;
+    protected $cellphone;
 
 
     /**
-     * @ORM\Column(type="string")
-     *
-     * @var string
+     * @ORM\ManyToOne(targetEntity="Address", inversedBy="customers")
+     * @ORM\JoinColumn(name="address_id", referencedColumnName="id")
      */
     protected $address;
 
@@ -90,38 +89,6 @@ class Customer
     /**
      * @return string
      */
-    public function getFirstName(): string
-    {
-        return $this->firstName;
-    }
-
-    /**
-     * @param string $firstName
-     */
-    public function setFirstName(string $firstName): void
-    {
-        $this->firstName = $firstName;
-    }
-
-    /**
-     * @return string
-     */
-    public function getLastName(): string
-    {
-        return $this->lastName;
-    }
-
-    /**
-     * @param string $lastName
-     */
-    public function setLastName(string $lastName): void
-    {
-        $this->lastName = $lastName;
-    }
-
-    /**
-     * @return string
-     */
     public function getEmail(): string
     {
         return $this->email;
@@ -133,22 +100,6 @@ class Customer
     public function setEmail(string $email): void
     {
         $this->email = $email;
-    }
-
-    /**
-     * @return string
-     */
-    public function getPhoneNr(): string
-    {
-        return $this->phoneNr;
-    }
-
-    /**
-     * @param string $phoneNr
-     */
-    public function setPhoneNr(string $phoneNr): void
-    {
-        $this->phoneNr = $phoneNr;
     }
 
     /**
@@ -183,6 +134,51 @@ class Customer
         $this->password = $password;
     }
 
+    /**
+     * @return string
+     */
+    public function getFirstName(): string
+    {
+        return $this->first_name;
+    }
 
+    /**
+     * @param string $first_name
+     */
+    public function setFirstName(string $first_name): void
+    {
+        $this->first_name = $first_name;
+    }
 
+    /**
+     * @return string
+     */
+    public function getLastName(): string
+    {
+        return $this->last_name;
+    }
+
+    /**
+     * @param string $last_name
+     */
+    public function setLastName(string $last_name): void
+    {
+        $this->last_name = $last_name;
+    }
+
+    /**
+     * @return string
+     */
+    public function getCellphone(): string
+    {
+        return $this->cellphone;
+    }
+
+    /**
+     * @param string $cellphone
+     */
+    public function setCellphone(string $cellphone): void
+    {
+        $this->cellphone = $cellphone;
+    }
 }
