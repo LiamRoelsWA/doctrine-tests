@@ -2,6 +2,7 @@
 
 use Doctrine\ORM\Tools\Setup;
 use Doctrine\ORM\EntityManager;
+use Doctrine\DBAL\Types\Type;
 
 require_once "vendor/autoload.php";
 
@@ -19,3 +20,5 @@ $conn = array(
 
 // obtaining the entity manager
 $em = EntityManager::create($conn, $config);
+
+Type::addType('password', 'Cpliakas\Password\Doctrine\PasswordType');
