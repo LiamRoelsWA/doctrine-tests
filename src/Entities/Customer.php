@@ -19,5 +19,5 @@ class Customer
     protected $lastName;
 
 
-    
+
 }
