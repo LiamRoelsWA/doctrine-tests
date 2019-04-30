@@ -1,4 +1,6 @@
 <?php
-require_once "./bootstrap.php";
+require_once __DIR__."/bootstrap.php";
 
-return \Doctrine\ORM\Tools\Console\ConsoleRunner::createHelperSet($em);
+use Doctrine\ORM\Tools\Console\ConsoleRunner;
+
+return ConsoleRunner::createHelperSet($em);

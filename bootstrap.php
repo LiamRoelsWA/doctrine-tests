@@ -6,7 +6,7 @@ use Doctrine\DBAL\Types\Type;
 
 require_once "vendor/autoload.php";
 
-$isDevMode = true;
+$isDevMode = false;
 $config = Setup::createAnnotationMetadataConfiguration(array(__DIR__."/src"), $isDevMode, null, null, false);
 
 // database configuration parameters
@@ -20,5 +20,3 @@ $conn = array(
 
 // obtaining the entity manager
 $em = EntityManager::create($conn, $config);
-
-Type::addType('password', 'Cpliakas\Password\Doctrine\PasswordType');
